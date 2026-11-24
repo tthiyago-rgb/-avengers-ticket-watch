@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080911">
+  <meta name="description" content="Avengers: Doomsday ticket watch dashboard for Seven Screen's Cinemas, Kilambakkam, Chennai.">
+  <title>Avengers Ticket Watch</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080911;--panel:rgba(20,22,39,.78);--line:rgba(174,167,255,.16);--text:#f4f3ff;--muted:#a4a4b9;--green:#b7ff53;--purple:#a58cff;--red:#ff778e;--amber:#ffd27a;--radius:22px}
+    *{box-sizing:border-box}html{min-height:100%;background:var(--bg);scroll-behavior:smooth}body{margin:0;min-height:100vh;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(ellipse at 85% 4%,rgba(111,65,194,.25),transparent 34rem),radial-gradient(ellipse at 2% 28%,rgba(33,130,89,.12),transparent 30rem),linear-gradient(150deg,#080911,#0c0d19 55%,#090a12)}
+    button,a{-webkit-tap-highlight-color:transparent}a{color:inherit}.shell{width:min(100%,760px);margin:0 auto;padding:24px 0 42px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 2px 24px}.brand{display:flex;align-items:center;gap:12px}.brandmark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:var(--green);font-weight:900;font-size:20px;background:linear-gradient(145deg,rgba(183,255,83,.16),rgba(165,140,255,.16));border:1px solid var(--line);box-shadow:0 0 26px rgba(165,140,255,.16)}.brand-title{font-size:12px;letter-spacing:.18em;font-weight:850}.brand-sub{font-size:11px;color:var(--muted);margin-top:4px}.live-pill{display:flex;align-items:center;gap:8px;border:1px solid rgba(255,210,122,.24);background:rgba(255,210,122,.07);padding:9px 11px;border-radius:99px;color:var(--amber);font-size:10px;font-weight:800;letter-spacing:.08em;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 11px currentColor}
+    .hero{position:relative;overflow:hidden;padding:28px 23px 24px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(29,31,53,.9),rgba(15,16,29,.82));box-shadow:0 20px 70px rgba(0,0,0,.26);animation:rise .55s ease both}.hero:after{content:"";position:absolute;right:-55px;top:-85px;width:210px;height:210px;border-radius:50%;border:1px solid rgba(165,140,255,.22);box-shadow:0 0 0 22px rgba(165,140,255,.035),0 0 0 48px rgba(165,140,255,.025);pointer-events:none}.eyebrow{color:var(--green);font-weight:800;font-size:10px;letter-spacing:.2em;text-transform:uppercase}.hero h1{font-size:clamp(29px,8vw,46px);line-height:1.04;letter-spacing:-.045em;margin:12px 0 9px;max-width:520px}.hero p{margin:0;color:var(--muted);font-size:14px}.date-chip{display:inline-flex;margin-top:22px;align-items:center;gap:8px;border:1px solid rgba(183,255,83,.18);background:rgba(183,255,83,.07);color:#e4ffbd;padding:10px 13px;border-radius:13px;font-size:12px;font-weight:700}
+    .section-label{margin:25px 3px 11px;font-size:10px;color:#9393aa;font-weight:800;letter-spacing:.17em;text-transform:uppercase}.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 12px 38px rgba(0,0,0,.15)}.status-card{padding:19px}.status-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.status-head h2{margin:0;font-size:14px}.status-value{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border-radius:99px;background:rgba(165,140,255,.1);border:1px solid rgba(165,140,255,.2);color:#d8cdff;font-size:11px;font-weight:900;letter-spacing:.08em}.status-value[data-state="AVAILABLE"]{color:var(--green);border-color:rgba(183,255,83,.3);background:rgba(183,255,83,.08)}.status-value[data-state="CHECK FAILED"]{color:var(--red);border-color:rgba(255,119,142,.3);background:rgba(255,119,142,.08)}.status-value[data-state="NOT LISTED"]{color:var(--amber)}.status-note{margin:13px 0 18px;font-size:12px;color:var(--muted);line-height:1.55}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:12px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);min-width:0}.stat-label{display:block;color:#9292a8;font-size:10px;margin-bottom:7px}.stat-value{display:block;font-size:12px;font-weight:700;overflow-wrap:anywhere;line-height:1.4}
+    .details{padding:17px 18px;display:grid;grid-template-columns:1fr 1fr;gap:17px 12px}.detail-label{display:block;color:#9292a8;font-size:10px;margin-bottom:5px}.detail-value{font-size:12px;font-weight:650;line-height:1.4}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{min-height:50px;border-radius:15px;padding:12px 14px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:var(--text);font:700 12px/1.2 inherit;font-family:inherit;font-size:12px;font-weight:750;cursor:pointer;transition:transform .18s ease,filter .18s ease,border-color .18s ease;touch-action:manipulation}.btn:active{transform:scale(.98)}.btn:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:3px}.btn-primary{background:linear-gradient(110deg,#b7ff53,#87eb54);border-color:transparent;color:#11170c;box-shadow:0 7px 24px rgba(137,239,83,.15)}.btn-purple{border-color:rgba(165,140,255,.3);background:rgba(165,140,255,.1)}.btn-danger{border-color:rgba(255,119,142,.24);color:#ffb5c1}.btn:disabled{opacity:.55;cursor:wait}.wide{grid-column:1/-1}.links{display:grid;gap:10px}.link-row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:55px;padding:12px 15px;text-decoration:none;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035);font-size:12px;font-weight:700;transition:background .2s}.link-row:hover{background:rgba(165,140,255,.09)}.link-row span:last-child{color:var(--purple);font-size:17px}.activity{padding:6px 16px}.activity-item{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07)}.activity-item:last-child{border-bottom:0}.activity-top{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:750}.activity-time{color:#9696ad;font-size:10px;text-align:right}.activity-detail{margin-top:6px;color:var(--muted);font-size:11px;line-height:1.5;overflow-wrap:anywhere}.empty{padding:18px 0;color:var(--muted);font-size:12px}.footnote{margin:20px 4px 0;color:#88889e;font-size:10px;line-height:1.65}.footnote strong{color:#c6c3d8}.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:5;max-width:calc(100% - 32px);width:max-content;padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:#1a1b2b;color:var(--text);font-size:12px;box-shadow:0 12px 40px #0008;transition:opacity .2s,transform .2s}.toast.show{opacity:1;transform:translate(-50%,0)}.spin{display:inline-block;animation:rotate 1s linear infinite}@keyframes rotate{to{transform:rotate(360deg)}}@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+    @media(min-width:620px){.shell{padding-top:34px}.hero{padding:35px}.details{grid-template-columns:repeat(4,1fr)}.actions{grid-template-columns:repeat(3,1fr)}.actions .wide{grid-column:auto}.actions #confirmBtn{grid-column:1/-1}.links{grid-template-columns:1fr 1fr}.links a:last-child{grid-column:1/-1}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brandmark" aria-hidden="true">T</div><div><div class="brand-title">TICKET WATCH</div><div class="brand-sub">AVENGERS: DOOMSDAY</div></div></div>
+      <div class="live-pill" id="monitorPill"><span class="dot"></span><span id="monitorText">MANUAL ONLY</span></div>
+    </header>
+
+    <section class="hero" aria-labelledby="movieTitle">
+      <div class="eyebrow">Your movie night, on watch</div>
+      <h1 id="movieTitle">Avengers:<br>Doomsday</h1>
+      <p>Ticket watch for Seven Screen’s Cinemas</p>
+      <div class="date-chip"><span aria-hidden="true">◷</span> Thursday, 17 December 2026</div>
+    </section>
+
+    <div class="section-label">Availability status</div>
+    <section class="card status-card" aria-live="polite">
+      <div class="status-head"><h2>Ticket availability</h2><span class="status-value" id="availability" data-state="UNVERIFIED"><span class="dot"></span><span>UNVERIFIED</span></span></div>
+      <p class="status-note" id="statusNote">Live monitoring is not connected yet. No ticket availability has been verified. Use Check Now to attempt a public-page retrieval; the source may block browser access or may not expose reliable show data.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Last checked</span><span class="stat-value" id="lastChecked">Not checked yet</span></div>
+        <div class="stat"><span class="stat-label">Source / verification</span><span class="stat-value" id="sourceStatus">No check performed</span></div>
+      </div>
+    </section>
+
+    <div class="section-label">Your ticket criteria</div>
+    <section class="card details" aria-label="Requested movie ticket details">
+      <div><span class="detail-label">THEATRE</span><span class="detail-value">Seven Screen’s Cinemas</span></div>
+      <div><span class="detail-label">LOCATION</span><span class="detail-value">Kilambakkam, Chennai</span></div>
+      <div><span class="detail-label">TICKETS</span><span class="detail-value">2 · English</span></div>
+      <div><span class="detail-label">SHOWTIME / FORMAT</span><span class="detail-value">After 6:00 PM IST · Any</span></div>
+    </section>
+
+    <div class="section-label">Controls</div>
+    <section class="actions" aria-label="Monitoring controls">
+      <button class="btn btn-primary wide" id="checkBtn" type="button">↻ &nbsp;Check Now</button>
+      <button class="btn btn-purple" id="notifyBtn" type="button">♧ &nbsp;Test Notification</button>
+      <button class="btn" id="pauseBtn" type="button">Ⅱ &nbsp;Pause</button>
+      <button class="btn" id="resumeBtn" type="button">▶ &nbsp;Resume</button>
+      <button class="btn btn-danger" id="confirmBtn" type="button">✓ &nbsp;Confirm Booking</button>
+    </section>
+
+    <div class="section-label">Official booking sources</div>
+    <nav class="links" aria-label="Official ticket booking links">
+      <a class="link-row" href="https://www.district.in/movies/seven-screen-s-cinemas-kilambakkam-chennai-CD1102122" target="_blank" rel="noopener noreferrer"><span>District · Seven Screen’s Cinemas</span><span aria-hidden="true">↗</span></a>
+      <a class="link-row" href="https://www.district.in/movies/avengers-doomsday-movie-tickets-in-chennai-MV176735" target="_blank" rel="noopener noreferrer"><span>District · Avengers: Doomsday</span><span aria-hidden="true">↗</span></a>
+      <a class="link-row" href="https://ticketnew.com/movies/chennai/" target="_blank" rel="noopener noreferrer"><span>TicketNew · Chennai listings</span><span aria-hidden="true">↗</span></a>
+    </nav>
+
+    <div class="section-label">Activity history</div>
+    <section class="card activity" id="activityLog" aria-live="polite" aria-label="Recent activity"><div class="empty">No activity yet. Checks and actions will appear here.</div></section>
+    <p class="footnote"><strong>Important:</strong> This page does not monitor in the background. Check Now only attempts to fetch the public District movie page from this browser; browser CORS rules or site restrictions may prevent access. A page response alone cannot verify showtime, language, or two-seat inventory, so no successful availability is inferred. Always verify directly with the official seller. This app never purchases tickets.</p>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (()=>{
+    'use strict';
+    const STORE_KEY='avengers-ticket-watch-v1';
+    const sources=[
+      {name:'District · Avengers: Doomsday',url:'https://www.district.in/movies/avengers-doomsday-movie-tickets-in-chennai-MV176735'},
+      {name:'District · Seven Screen’s Cinemas',url:'https://www.district.in/movies/seven-screen-s-cinemas-kilambakkam-chennai-CD1102122'},
+      {name:'TicketNew · Chennai',url:'https://ticketnew.com/movies/chennai/'}
+    ];
+    const $=id=>document.getElementById(id);
+    const defaults={paused:false,booked:false,notifications:false,lastChecked:null,lastResult:{state:'UNVERIFIED',note:'Live monitoring is not connected yet. No ticket availability has been verified.',source:'No check performed'},history:[]};
+    let state=loadState();let toastTimer;
+    function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return structuredClone(defaults);const parsed=JSON.parse(raw);return {...structuredClone(defaults),...parsed,history:Array.isArray(parsed.history)?parsed.history.slice(0,50):[]}}catch(e){return structuredClone(defaults)}}
+    function persist(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state))}catch(e){showToast('Could not save preferences on this device.')}}
+    function formatDate(value){if(!value)return'Not checked yet';try{return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date(value))}catch(e){return'Invalid saved timestamp'}}
+    function showToast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3200)}
+    function addActivity(source,result,detail){state.history.unshift({at:new Date().toISOString(),source,result,detail});state.history=state.history.slice(0,50);persist();renderHistory()}
+    function renderHistory(){const el=$('activityLog');if(!state.history.length){el.innerHTML='<div class="empty">No activity yet. Checks and actions will appear here.</div>';return}el.replaceChildren(...state.history.slice(0,20).map(item=>{const row=document.createElement('div');row.className='activity-item';const top=document.createElement('div');top.className='activity-top';const result=document.createElement('span');result.textContent=item.result;const time=document.createElement('time');time.className='activity-time';time.textContent=formatDate(item.at);top.append(result,time);const detail=document.createElement('div');detail.className='activity-detail';detail.textContent=(item.source?item.source+' — ':'')+(item.detail||'');row.append(top,detail);return row}))}
+    function render(){const result=state.lastResult||defaults.lastResult;$('lastChecked').textContent=formatDate(state.lastChecked);$('sourceStatus').textContent=result.source||'No check performed';$('statusNote').textContent=result.note||'';const badge=$('availability');badge.dataset.state=result.state||'UNVERIFIED';badge.querySelector('span:last-child').textContent=result.state||'UNVERIFIED';const text=state.booked?'BOOKING CONFIRMED — MONITORING STOPPED':state.paused?'PAUSED · MANUAL ONLY':'MANUAL ONLY';$('monitorText').textContent=text;$('monitorPill').style.color=state.booked?'var(--green)':state.paused?'var(--muted)':'var(--amber)';$('pauseBtn').disabled=state.paused||state.booked;$('resumeBtn').disabled=!state.paused||state.booked;$('checkBtn').disabled=state.booked;renderHistory()}
+    async function checkNow(){if(state.booked){showToast('Booking is confirmed; checks are stopped.');return}if(state.paused){showToast('Monitoring is paused. Resume before checking.');return}const button=$('checkBtn');button.disabled=true;button.innerHTML='<span class="spin">↻</span> &nbsp;Checking source…';$('sourceStatus').textContent='Attempting public-page retrieval';$('statusNote').textContent='Requesting the official District movie page. A successful page fetch does not itself verify showtime or seat inventory.';try{const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);let response;try{response=await fetch(sources[0].url,{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',signal:controller.signal,headers:{'Accept':'text/html'}})}finally{clearTimeout(timeout)}const checkedAt=new Date().toISOString();state.lastChecked=checkedAt;if(!response.ok){const msg=`District returned HTTP ${response.status}${response.status===403?' (access forbidden)':response.status===429?' (rate limited)':''}. No availability conclusion was made.`;state.lastResult={state:'CHECK FAILED',note:msg,source:sources[0].name};addActivity(sources[0].name,'CHECK FAILED',msg)}else{const contentType=response.headers.get('content-type')||'';if(!contentType.toLowerCase().includes('text/html')){const msg=`Unexpected response type: ${contentType||'not provided'}. Listing data could not be verified.`;state.lastResult={state:'UNVERIFIED',note:msg,source:sources[0].name};addActivity(sources[0].name,'UNVERIFIED',msg)}else{await response.text();const msg='The public page responded, but this dashboard has no documented, reliable listing feed to verify the exact date, venue, English language, post-6 PM showtime, format, and two available seats. No availability is claimed.';state.lastResult={state:'UNVERIFIED',note:msg,source:sources[0].name};addActivity(sources[0].name,'UNVERIFIED','Page retrieved; exact show and two-ticket inventory cannot be confirmed. Check the official listing manually.')}}}catch(error){const checkedAt=new Date().toISOString();state.lastChecked=checkedAt;const isAbort=error&&error.name==='AbortError';const msg=isAbort?'The public-page request timed out. No availability conclusion was made.':'The browser could not read the public page (possibly CORS, network, or site access restrictions). No availability conclusion was made.';state.lastResult={state:isAbort?'CHECK FAILED':'UNVERIFIED',note:msg,source:sources[0].name};addActivity(sources[0].name,state.lastResult.state,msg)}finally{persist();render();button.disabled=state.booked;button.innerHTML='↻ &nbsp;Check Now'}}
+    async function testNotification(){if(!('Notification'in window)){addActivity('Browser notification','UNVERIFIED','Notifications are not supported in this browser.');showToast('Notifications are not supported in this browser.');return}try{let permission=Notification.permission;if(permission==='default')permission=await Notification.requestPermission();if(permission!=='granted'){const message=permission==='denied'?'Permission denied. Enable notifications in browser or device settings.':'Permission was not granted.';addActivity('Browser notification','CHECK FAILED',message);showToast(message);return}const notification=new Notification('Avengers Ticket Watch',{body:'Test notification. Ticket availability has not been verified.',tag:'avengers-watch-test'});notification.onclick=()=>{window.focus();notification.close()};state.notifications=true;persist();addActivity('Browser notification','TEST SENT','This is a test only; it does not indicate tickets are available.');showToast('Test notification sent.')}catch(error){addActivity('Browser notification','CHECK FAILED',error.message||'Notification could not be displayed.');showToast('Could not send notification. Check browser permissions.')}}
+    $('checkBtn').addEventListener('click',checkNow);$('notifyBtn').addEventListener('click',testNotification);
+    $('pauseBtn').addEventListener('click',()=>{if(state.booked)return;state.paused=true;persist();render();addActivity('Monitoring controls','PAUSED','Automatic/background monitoring is not connected; manual checks are paused in this dashboard.')});
+    $('resumeBtn').addEventListener('click',()=>{if(state.booked)return;state.paused=false;persist();render();addActivity('Monitoring controls','RESUMED','Manual checks are enabled. Background monitoring is not connected.')});
+    $('confirmBtn').addEventListener('click',()=>{if(state.booked){showToast('Booking was already confirmed.');return}if(!window.confirm('Confirm that you have booked your tickets? This only stops checks in this dashboard. It will not make or verify a purchase.'))return;state.booked=true;state.paused=true;persist();render();addActivity('Booking control','CONFIRMED','You confirmed booking. Dashboard checks are stopped; no purchase was made by this app.');showToast('Checks stopped. Enjoy the movie!')});
+    render();
+  })();
+  </script>
+</body>
+</html>
