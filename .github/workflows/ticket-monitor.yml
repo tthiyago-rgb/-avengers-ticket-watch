@@ -10,51 +10,10 @@ permissions:
 
 jobs:
   check-sources:
-    name: Check ticket source websites
+    name: Inspect public ticket pages
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 3
 
     steps:
-      - name: Check official ticket sources
-        shell: bash
-        run: |
-          set +e
-
-          echo "Avengers Doomsday Ticket Watch"
-          echo "Target date: 17 December 2026"
-          echo "Target venue: Seven Screen's Cinemas"
-          echo "Requirements: 2 English tickets after 6 PM IST"
-          echo "Check time (UTC): $(date -u)"
-
-          check_url() {
-            URL="$1"
-
-            RESULT=$(curl \
-              -L \
-              -sS \
-              -o /dev/null \
-              -w "%{http_code}" \
-              --max-time 20 \
-              "$URL")
-
-            EXIT_CODE=$?
-
-            if [ "$EXIT_CODE" -ne 0 ]; then
-              echo "CHECK FAILED: $URL"
-              echo "curl exit code: $EXIT_CODE"
-            else
-              echo "HTTP status $RESULT: $URL"
-            fi
-          }
-
-          check_url \
-            "https://www.district.in/movies/seven-screen-s-cinemas-kilambakkam-chennai-CD1102122"
-
-          check_url \
-            "https://www.district.in/movies/avengers-doomsday-movie-tickets-in-chennai-MV176735"
-
-          check_url \
-            "https://ticketnew.com/movies/chennai/"
-
-          echo "Source checks completed."
-          echo "HTTP responses do not prove ticket availability."
+      - name: Check page content
+        run: python3 scripts/ticket_monitor.py
