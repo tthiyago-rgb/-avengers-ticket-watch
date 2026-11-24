@@ -15,5 +15,13 @@ jobs:
     timeout-minutes: 3
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
       - name: Check page content
         run: python3 scripts/ticket_monitor.py
